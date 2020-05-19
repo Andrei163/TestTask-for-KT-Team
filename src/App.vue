@@ -1,32 +1,35 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+	<div class="body">
+		<todo></todo>
+	</div>
 </template>
 
+<script>
+import todo from "./components/TodoList";
+export default {
+	components: {
+		todo
+	}
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.body {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 25px;
+	background-color: rgb(224, 227, 230);
 }
 
-#nav {
-  padding: 30px;
+@media (max-width: 768px) {
+	.body {
+		max-width: 768px;
+	}
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+@media (max-width: 576px) {
+	.body {
+		max-width: 576px;
+	}
 }
 </style>
