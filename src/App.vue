@@ -13,7 +13,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped>
 .body {
 	max-width: 960px;
 	margin: 0 auto;
