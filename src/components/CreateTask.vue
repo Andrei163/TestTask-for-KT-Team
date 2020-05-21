@@ -1,7 +1,7 @@
 <template>
 	<form class="todo-form" @submit.prevent="addTodo()">
 		<input
-			v-model="newTodo"
+			v-model="title"
 			class="newtask"
 			type="text"
 			id="newtask"
@@ -13,19 +13,26 @@
 </template>
 
 <script>
+// import { db } from "@/main";
 export default {
 	data() {
 		return {
-			newTodo: ""
+			title: ""
 		};
 	},
+
 	methods: {
+		// addTodo(title) {
+		//   const createdAt = new Date();
+		//   db.collection("testTask").add({ title, createdAt });
+		//   this.title = "";
+		// },
 		addTodo() {
 			const task = {
-				title: this.newTodo
+				title: this.title
 			};
 			this.$store.dispatch("createTask", task);
-			this.newTodo = "";
+			this.title = "";
 		}
 	}
 };

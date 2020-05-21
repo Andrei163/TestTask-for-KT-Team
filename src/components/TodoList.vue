@@ -1,6 +1,11 @@
 <template>
 	<div class="wrapper">
 		<h1>Задачи</h1>
+		<div>
+			<article v-for="(location, idx) in locations" :key="idx">
+				<h1>{{ location.title }}</h1>
+			</article>
+		</div>
 		<createtask></createtask>
 
 		<todo></todo>
@@ -8,12 +13,24 @@
 </template>
 
 <script>
+import { db } from "@/main";
 import createtask from "./CreateTask";
 import todo from "./Todo";
 export default {
 	components: {
 		createtask,
 		todo
+	},
+	data() {
+		return {
+			locations: [],
+			newTodo: "" // <-- новое свойство
+		};
+	},
+	firestore() {
+		return {
+			locations: db.collection("testTask")
+		};
 	}
 };
 </script>
@@ -22,17 +39,4 @@ export default {
 h1 {
 	text-align: left;
 }
-
-/* .wrapper {
-	width: 960px;
-	padding: 25px;
-	background-color: rgb(224, 227, 230);
-}
-
-@media (max-width: 1200px) {
-.wrapper {
-	width: 800px;
-	
-} */
-/* } */
 </style>

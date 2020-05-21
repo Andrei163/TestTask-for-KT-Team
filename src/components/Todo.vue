@@ -3,9 +3,15 @@
 		<ul class="tasklist">
 			<li v-for="(task, index) of displayedPosts" :key="index">
 				{{ task.id }}) {{ task.title }}
-				<span class="close" @click="removeTask(task.index)">X</span>
+				<div>
+					<router-link tag="button" class="btn" :to="'/edit/' + index"
+						>red</router-link
+					>
+					<span class="close" @click="removeTask(task.index)">X</span>
+				</div>
 			</li>
 		</ul>
+
 		<nav class="navigation">
 			<ul class="pagination">
 				<li class="page-item">
@@ -45,14 +51,21 @@
 </template>
 
 <script>
+import { db } from "@/main";
 import { mapActions } from "vuex";
 export default {
 	data() {
 		return {
+			locations: [],
 			posts: [],
 			page: 1,
 			perPage: 10,
 			pages: []
+		};
+	},
+	firestore() {
+		return {
+			locations: db.collection("testTask")
 		};
 	},
 	computed: {
@@ -64,7 +77,9 @@ export default {
 		getPosts() {
 			this.posts = [];
 			this.pages = [];
-			let data = this.$store.getters.tasks;
+			//   const data = this.$store.getters.tasks;
+			const data = this.locations;
+			console.log(Object.values(data));
 			for (let i = 0; i < data.length; i++) {
 				this.posts.push({
 					title: data[i].title,
@@ -158,5 +173,15 @@ li {
 
 .page-item {
 	padding: 0;
+}
+
+.btn {
+	background-color: red;
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background-color: rgb(250, 129, 129);
 }
 </style>
